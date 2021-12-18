@@ -1,0 +1,12 @@
+[package]
+name = "toy_rism"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+toml = "0.5.8"
+approx = "0.5.0"
+ndarray =  { version = "0.15.4", features = ["approx-0_5"] }
+
