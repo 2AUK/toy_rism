@@ -8,5 +8,9 @@ edition = "2021"
 [dependencies]
 toml = "0.5.8"
 approx = "0.5.0"
+plotters = "0.3"
 ndarray =  { version = "0.15.4", features = ["approx-0_5"] }
-
+csv = "1.1"
+num-traits = "0.2.14"
+serde = "1.0.117"
+ndarray-stats = "0.5.0"

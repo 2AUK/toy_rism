@@ -1,4 +1,6 @@
-mod grid;
+pub mod grid;
+pub mod potential;
+pub mod util;
 
 struct RISM {}
 
