@@ -6,6 +6,7 @@ use approx::assert_relative_eq;
 // Only implementing LJ potential at the moment
 pub struct LJPotential<'a> {
     temp: f64,
+    k_bT: f64,
     epsilon: f64,
     sigma: f64,
     pub grid: &'a Grid,
@@ -13,7 +14,7 @@ pub struct LJPotential<'a> {
 }
 
 impl<'a> LJPotential<'a>{
-    pub fn new(temp: f64, epsilon: f64, sigma: f64, grid: &'a Grid) -> LJPotential {
+    pub fn new(temp: f64, k_bT: f64, epsilon: f64, sigma: f64, grid: &'a Grid) -> LJPotential {
 
         let result = (1.0 / temp) * 4.0 * epsilon *
             ( (sigma / &grid.ri).mapv(|a| a.powf(12.0)) -
@@ -21,6 +22,7 @@ impl<'a> LJPotential<'a>{
 
         LJPotential {
             temp: temp,
+            k_bT: k_bT,
             epsilon: epsilon,
             sigma: sigma,
             grid: grid,
@@ -39,7 +41,7 @@ mod tests {
         // and calculate LJ over grid
         let grid = Grid::new(163840, 0.0001);
         // parameters for liquid argon at 85 K
-        let pot = LJPotential::new(85.0, 120.0, 3.4, &grid);
+        let pot = LJPotential::new(85.0, 1.0, 120.0, 3.4, &grid);
 
         // Compute analytical r_min of LJ
         let rmin = 3.4 * f64::powf(2.0, 1.0 / 6.0);
