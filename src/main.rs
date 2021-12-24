@@ -16,7 +16,7 @@ kT = 1.0
 kU = 0.00198720414667
 charge_coeff = 167101.0
 npts = 512
-radius = 20.48
+dr = 0.01
 lam = 10
 
 [params]
@@ -34,7 +34,7 @@ adbcor = 0.5
 nsv = 1
 nspv = 1
 
-[solvent.argon]
+[solvent.species.argon]
 dens = 0.021017479720736955
 ns = 1
 "Ar" = [
@@ -46,9 +46,10 @@ ns = 1
 static N2: &str = r#"[system]
 temp = 72
 kT = 1.0
+kU = 0.00198720414667
 charge_coeff = 167101.0
 npts = 2048
-radius = 20.48
+dr = 20.48
 lam = 10
 
 [params]
@@ -64,7 +65,7 @@ tol = 1E-7
 nsv = 2
 nspv = 1
 
-[solvent.N2]
+[solvent.species.N2]
 dens = 0.01867
 ns = 2
 "N1" = [
@@ -78,9 +79,6 @@ ns = 2
 ]"#;
 
 fn main() {
-    let argon_toml: toml::Value = toml::from_str(&ARGON).unwrap();
-    let n2_toml: toml::Value = toml::from_str(&N2).unwrap();
-
     //how do use toml lole
     //println!("{}", argon_toml);
     //let param_array: Array1<f64> = argon_toml["solvent"]["argon"]["Ar"][0].as_array()
@@ -106,5 +104,6 @@ fn main() {
     //println!("{:10.3e}\n\n{:10.3e}\n\n{:10.3e}", &mayer_f, kspace, &rspace);
 
     //write_csv(&grid.ri, &rspace, "arLJ.csv").expect("Could not create file!");
-    initialise(argon_toml);
+    initialise(&ARGON);
+    initialise(&N2);
 }
