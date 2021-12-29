@@ -8,7 +8,7 @@ use csv;
 use toy_rism::grid::Grid;
 use toy_rism::potential::LJPotential;
 use toy_rism::util::write_csv;
-use toy_rism::initialise;
+use toy_rism::{initialise, solve};
 
 static ARGON: &str = r#"[system]
 temp = 85
@@ -104,6 +104,9 @@ fn main() {
     //println!("{:10.3e}\n\n{:10.3e}\n\n{:10.3e}", &mayer_f, kspace, &rspace);
 
     //write_csv(&grid.ri, &rspace, "arLJ.csv").expect("Could not create file!");
-    initialise(&ARGON);
-    initialise(&N2);
+    let argon = initialise(&ARGON);
+    println!("{:?}", argon);
+    let n2 = initialise(&N2);
+    println!("{:?}", n2);
+    solve(n2);
 }
