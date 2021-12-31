@@ -15,8 +15,8 @@ temp = 85
 kT = 1.0
 kU = 0.00198720414667
 charge_coeff = 167101.0
-npts = 512
-dr = 0.01
+npts = 16384
+dr = 0.001
 lam = 10
 
 [params]
@@ -24,7 +24,7 @@ potential = "LJ"
 closure = "HNC"
 IE = "XRISM"
 solver = "Ng"
-picard_damping = 0.001
+picard_damping = 0.217
 itermax = 10000
 tol = 1E-12
 diel = 1.5053
@@ -48,8 +48,8 @@ temp = 72
 kT = 1.0
 kU = 0.00198720414667
 charge_coeff = 167101.0
-npts = 2048
-dr = 20.48
+npts = 16384
+dr = 0.001
 lam = 10
 
 [params]
@@ -57,9 +57,9 @@ potential = "LJ"
 closure = "PY"
 IE = "XRISM"
 solver = "Ng"
-picard_damping = 0.001
+picard_damping = 0.217
 itermax = 10000
-tol = 1E-7
+tol = 1E-12
 
 [solvent]
 nsv = 2
@@ -104,9 +104,9 @@ fn main() {
     //println!("{:10.3e}\n\n{:10.3e}\n\n{:10.3e}", &mayer_f, kspace, &rspace);
 
     //write_csv(&grid.ri, &rspace, "arLJ.csv").expect("Could not create file!");
-    let argon = initialise(&ARGON);
+    let mut argon = initialise(&ARGON);
     println!("{:?}", argon);
-    let n2 = initialise(&N2);
+    let mut n2 = initialise(&N2);
     println!("{:?}", n2);
-    solve(n2);
+    solve(&mut argon);
 }

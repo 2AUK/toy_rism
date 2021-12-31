@@ -16,7 +16,7 @@ pub struct LJPotential<'a> {
 impl<'a> LJPotential<'a>{
     pub fn new(temp: f64, k_bT: f64, epsilon: f64, sigma: f64, grid: &'a Grid) -> LJPotential {
 
-        let result = (1.0 / temp) * 4.0 * epsilon *
+        let result = (1.0 / (temp* k_bT)) * 4.0 * epsilon *
             ( (sigma / &grid.ri).mapv(|a| a.powf(12.0)) -
                ( (sigma / &grid.ri).mapv(|a| a.powf(6.0))  ));
 
